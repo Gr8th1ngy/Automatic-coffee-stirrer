@@ -16,7 +16,7 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
   pinMode(ledPin, OUTPUT); // Sets ledPin as an Output
-  myservo.attach(5);  // attaches the servo on pin 9 to the servo object
+  myservo.attach(5);  // attaches the servo on pin 5 to the servo object
   Serial.begin(9600); // Starts the serial communication
 }
 void loop() {
