@@ -1,4 +1,5 @@
-// constants won't change. They're used here to set pin numbers:
+// Turn LED on when button is held down
+
 const int buttonPin = 2;     // the number of the pushbutton pin
 const int ledPin =  4;      // the number of the LED pin
 

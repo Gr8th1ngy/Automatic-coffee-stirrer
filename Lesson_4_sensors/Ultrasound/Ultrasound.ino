@@ -1,3 +1,5 @@
+// Moves servo and turns on LED using an ultrasound sensor
+
 #include <Servo.h>
 
 // defines pins numbers
@@ -8,8 +10,8 @@ const int ledPin = 2;
 Servo myservo;  // create servo object to control a servo
 
 // defines variables
-long duration;
-int distance;
+long duration; // variable to store how long it takes for a pulse of ultrasound to bounce back from the object
+int distance; // variable to store the distance to the object
 int pos = 0;    // variable to store the servo position
 
 void setup() {
@@ -23,16 +25,22 @@ void loop() {
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
+  
   // Sets the trigPin on HIGH state for 10 micro seconds
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
+  
+  // Stops ultrasound pulsing
   digitalWrite(trigPin, LOW);
+  
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echoPin, HIGH);
+  
   // Calculating the distance
   distance = duration * 0.034 / 2;
-  if (distance < 10) {
-    digitalWrite(ledPin, HIGH);
+  
+  if (distance < 10) { // if the distance is less than 10
+    digitalWrite(ledPin, HIGH); // turns on LED
     for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
       myservo.write(pos);              // tell servo to go to position in variable 'pos'
       delay(3);                       // waits 1ms for the servo to reach the position
@@ -42,7 +50,7 @@ void loop() {
       delay(3);                       // waits 1ms for the servo to reach the position
     }
   } else {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(ledPin, LOW); // turns off LED
   }
   // Prints the distance on the Serial Monitor
   Serial.print("Distance: ");
